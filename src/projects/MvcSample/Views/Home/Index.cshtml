@@ -1,0 +1,204 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<div class="jumbotron">
+    <h1>Paynova .NET API Client Sample</h1>
+    <p>This MVC sample provides you with some samples, showing you how you can make use of the Paynova .NET API Client to integrate with Paynova's REST API.</p>
+    <p>
+        <a class="btn btn-lg btn-primary" href="http://nuget.org/packages/paynova.api.client" role="button">NuGet Package</a>
+        <a class="btn btn-lg btn-primary" href="https://github.com/Paynova/paynova-api-net-client" role="button">Paynova API Client on GitHub</a>
+        <a class="btn btn-lg btn-primary" href="http://docs.paynova.com" role="button">API Documentation</a>
+    </p>
+</div>
+
+<div class="content-block">
+    <h1>Samples</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                Checkout the <a href="@Url.Action("Index", "Samples")">Samples</a> for trying out
+                some of the operations you can perform and inspect the code to see how you can
+                use the <code>PaynovaClient</code> to interact with the API.
+            </p>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>
+
+<div class="content-block">
+    <h1>Quick start</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                To help you interact with Paynova's API, there's a simple
+                <code>Paynova.Api.Client.PaynovaClient</code> for you to use.
+                The easiest &amp; recommended way to install the client, is by using
+                <a href="http://nuget.org">NuGet</a>.
+            </p>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>
+
+<div class="content-block">
+    <h2>Install using NuGet</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                The Paynova API Client lib is distributed using NuGet. It supports .Net3.5+.
+                The package is located here:
+                <a href="http://nuget.org/packages/paynova.api.client">http://nuget.org/packages/paynova.api.client</a>
+            </p>
+            <p>
+                To install the Paynova .NET API Client, run the following command in the <a href="http://docs.nuget.org/docs/start-here/using-the-package-manager-console">Package Manager Console</a>
+            </p>
+            <div class="nuget-commandWrapper">
+                <div class="nuget-commandPrompt">
+                    <div class="nuget-command">PM&gt; Install-Package Paynova.Api.Client</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading"><span class="glyphicon glyphicon-question-sign"></span>Alternatives</div>
+                <div class="panel-body">
+                    Paynovas's API is a RESTful API, accessed over HTTP,
+                    hence you could of course use something like
+                    <a href="http://restsharp.org/">RestSharp</a> to
+                    interact with it.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-block">
+    <h2>Create an instance</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                The simplest way to create a client is to use the contructor that
+                accepts: <code>serverUrl</code>, <code>username</code> &amp; <code>password</code>
+            </p>
+            <pre><code>var client = new PaynovaClient("http://...", "youruserid", "yourpassword");</code></pre>
+        </div>
+        <div class="col-md-6"></div>
+    </div>
+</div>
+
+<div class="content-block">
+    <h2>Requests &amp; Responses</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                The Client is designed to work with requests and will provide responses in turn.
+                Hence, all operations availible to interact with the API, are located on the
+                client it self.
+            </p>
+            <h3>Requests</h3>
+            <p>
+                All availible request objects are located under: <code>Paynova.Api.Client.Requests</code>.
+                The most common requests, enough for performing a complete checkout, is:
+            </p>
+            <ul>
+                <li>CreateOrderRequest</li>
+                <li>InitializePaymentRequest</li>
+                <li>FinalizeAuthorizationRequest</li>
+            </ul>
+            <p>
+                Every request that provides a response with data, required to continue the process,
+                has a corresponding response, e.g. <code>CreateOrderResponse</code>.
+            </p>
+            <pre><code>var request = new CreateOrderRequest(orderNumber, currency, totalAmount);
+var response = client.CreateOrder(request);</code></pre>
+            <p>In some cases there are also simplifying overloads:</p>
+            <pre><code>var response = client.CreateOrder(orderNumber, currencyCode, totalAmount);</code></pre>
+
+            <h4>Optional arguments</h4>
+            <p>Some requests has optional fields. Those fields can be assigned just via a simple property setter:</p>
+            <pre><code>request.OrderDescription = "Some order...";</code></pre>
+            <p>When it comes to collections, those are assigned via methods, e.g.:</p>
+            <pre><code>request.WithLineItems(lineItem1, lineItem2, ...);</code></pre>
+            <p>Or for single item:</p>
+            <pre><code>request.AddLineItem(lineItem1);</code></pre>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span>Required variables</div>
+                <div class="panel-body">
+                    All variables that are required are required as
+                    arguments in the constructor. The request objects
+                    will perform simple validation and throw
+                    <code>ArgumentException</code> if something is missing.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-block">
+    <h2>PaynovaClientException</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <p>
+                Given that the request reaches a valid Paynova's endpoint, any failing operation/request
+                will cause a <code>PaynovaClientException</code> to be thrown. The exception contains
+                the following:
+            </p>
+            <dl>
+                <dt>ErrorNumber</dt><dd>Paynova provided error number.</dd>
+                <dt>StatusKey</dt><dd>Short error code.</dd>
+                <dt>StatusMessage</dt><dd>Description of why it failed.</dd>
+                <dt>RequestUri</dt><dd>The endpoint the request was peformed against.</dd>
+                <dt>RequestMethod</dt><dd>The underlying HTTP-method used to perform the request.</dd>
+                <dt>Errors</dt><dd>A collection with specific errors. E.g. validation error for a certain field.</dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span>Sample contents</div>
+                <div class="panel-body">
+                    <p>Below is a sample exception caused by creating a simple order with <code>CurrencyCode="S"</code> instead of e.g. <code>SEK</code></p>
+                    <p><span class="label label-primary">Root members</span></p>
+                    <dl>
+                        <dt>StatusMessage</dt>
+                        <dd>The request contained one or more validation errors.  See the errors collection for further details</dd>
+                        
+                        <dt>StatusKey</dt>
+                        <dd>VALIDATION_ERROR</dd>
+                        
+                        <dt>RequestMethod</dt>
+                        <dd>POST</dd>
+                        
+                        <dt>RequestUri.AbsolutePath</dt>
+                        <dd>/api/orders/create/1bd109a2c93743b6ba565695b468f16b/100/S</dd>
+                        
+                        <dt>ErrorNumber</dt>
+                        <dd>-2</dd>
+                    </dl>
+                    <p><span class="label label-primary">Errors collection</span></p>
+                    <dl>
+                        <dt>ErrorCode</dt>
+                        <dd>Length</dd>
+                        
+                        <dt>FieldName</dt>
+                        <dd>CurrencyCode</dd>
+                        
+                        <dt>Message</dt>
+                        <dd>'Currency Code' must be 3 characters in length. You entered 1 characters.</dd>
+                    </dl>
+                    <dl>
+                        <dt>ErrorCode</dt>
+                        <dd>RegularExpression</dd>
+                        
+                        <dt>FieldName</dt>
+                        <dd>CurrencyCode</dd>
+                        
+                        <dt>Message</dt>
+                        <dd>'Currency Code' is not in the correct format.</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

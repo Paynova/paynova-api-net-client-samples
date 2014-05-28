@@ -1,0 +1,28 @@
+﻿@model Paynova.Api.Client.Responses.RefundPaymentResponse
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-ok-sign"></span>Successful refund!</h3>
+    </div>
+    <div class="list-group">
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">TransactionId</h4>
+            <p class="list-group-item-text">@Model.TransactionId</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">CanRefundAgain</h4>
+            <p class="list-group-item-text">@Model.CanRefundAgain</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">TotalAmountRefunded</h4>
+            <p class="list-group-item-text">@Model.TotalAmountRefunded</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">TotalAmountPendingRefund</h4>
+            <p class="list-group-item-text">@Model.TotalAmountPendingRefund</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">AmountRemainingForRefund</h4>
+            <p class="list-group-item-text">@Model.AmountRemainingForRefund</p>
+        </div>
+    </div>
+</div>

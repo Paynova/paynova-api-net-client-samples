@@ -1,0 +1,46 @@
+﻿@model FinalizeViewModel
+@{
+    ViewBag.Title = "Finalize";
+}
+@Html.Partial("_BreadCrumb")
+
+<div class="m-samples row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span>Description</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    Once an authorization has been completed, you may need (depending on the payment method, e.g. cards) to
+                    perform a <code>FinalizeAuthorizationRequest</code> to complete the purchase.
+                </p>
+                <p>
+                    <span class="label label-primary"><span class="fa fa-lightbulb-o"></span></span>
+                    The data provided with you to the <strong>Success callback page</strong>, has enough
+                    information to perform a finalization.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @if (Model.Finalized != null)
+        {
+            @Html.Partial("_Finalized", Model.Finalized)
+        }
+
+        @if (!Model.FinalizableItems.Any())
+        {
+            <div class="alert alert-info">Nothing exists to finalize. You need to checkout something first.</div>
+        }
+        else
+        {
+            foreach (var item in Model.FinalizableItems)
+            {
+            <div class="form-container">
+                @Html.Partial("_FinalizeForm", item)
+            </div>
+            }
+        }
+    </div>
+</div>

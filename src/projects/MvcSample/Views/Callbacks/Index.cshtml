@@ -1,0 +1,44 @@
+﻿@model CallbacksViewModel
+@{
+    ViewBag.Title = "Callbacks";
+}
+<h1>Callbacks</h1>
+@if (!Model.Callbacks.Any())
+{
+    <div class="alert alert-info">Nothing to display</div>
+}
+else
+{
+    <p>The list below contains the values that where recieved from Paynova via the Event hook notification "system".</p>
+    <div class="panel-group" id="accordion">
+        @foreach (var callback in Model.Callbacks)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div>
+                        <a data-toggle="collapse" data-parent="#accordion" href="#cb@(callback.Id)">#@callback.Id - @callback.SessionId - @callback.Type <span class="pull-right">@callback.OccurredAt</span></a>
+                    </div>
+                </div>
+                <div id="cb@(callback.Id)" class="panel-collapse collapse">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var kv in callback.Values)
+                            {
+                                <tr>
+                                    <td>@kv.Key</td>
+                                    <td>@kv.Value</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    </div>
+}

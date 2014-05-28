@@ -1,0 +1,34 @@
+﻿@model Paynova.Api.Client.Responses.FinalizeAuthorizationResponse
+
+@if (Model == null) { return; }
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title"><span class="glyphicon glyphicon-ok-sign"></span> Successful finilization!</h3>
+    </div>
+    <div class="panel-body">
+        <div class="pull-right">@Html.Partial("_RefundInline", new Refundable { TransactionId = Model.TransactionId, TotalAmount = Model.TotalAmountFinalized })</div>
+    </div>
+    <div class="list-group">
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">TransactionId</h4>
+            <p class="list-group-item-text">@Model.TransactionId</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">CanFinalizeAgain</h4>
+            <p class="list-group-item-text">@Model.CanFinalizeAgain</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">TotalAmountFinalized</h4>
+            <p class="list-group-item-text">@Model.TotalAmountFinalized</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">TotalAmountPendingFinalization</h4>
+            <p class="list-group-item-text">@Model.TotalAmountPendingFinalization</p>
+        </div>
+        <div class="list-group-item">
+            <h4 class="list-group-item-heading">AmountRemainingForFinalization</h4>
+            <p class="list-group-item-text">@Model.AmountRemainingForFinalization</p>
+        </div>
+    </div>
+</div>
