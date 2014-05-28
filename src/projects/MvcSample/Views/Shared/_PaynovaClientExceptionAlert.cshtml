@@ -1,0 +1,42 @@
+﻿@using Paynova.Api.Client
+@{
+    var pex = TempData["PaynovaClientException"] as PaynovaSdkException;
+
+    if (pex != null)
+    {
+    <div class="alert-paynovaclientexception alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="label label-danger">PaynovaClientException</span>
+                <p>@pex.StatusMessage</p>
+                <dl>
+                    <dt>Status key:</dt>
+                    <dd>@pex.StatusKey</dd>
+
+                    <dt>Request:</dt>
+                    <dd>@pex.RequestMethod @pex.RequestUri.AbsolutePath</dd>
+                    
+                    <dt>Error number:</dt>
+                    <dd>@pex.ErrorNumber</dd>
+                </dl>
+            </div>
+            <div class="col-md-6">
+                @if (pex.Errors.Any())
+                {
+                    <ul>
+                        @foreach (var e in pex.Errors)
+                        {
+                            <li>
+                                <div><strong>Error code:</strong> @e.ErrorCode</div>
+                                <div><strong>Field name:</strong> @e.FieldName</div>
+                                <p><strong>Reason:</strong> @e.Message</p>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    }
+}

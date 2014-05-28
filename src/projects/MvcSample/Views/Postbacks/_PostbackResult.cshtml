@@ -1,0 +1,73 @@
+﻿@model PostbackResult
+@if (Model.IsEmpty)
+{
+    return;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">Common fields</div>
+            <div class="list-group">
+                @foreach (var kv in Model.GetNonPaymentPostedValues())
+                {
+                    <div class="list-group-item">
+                        <h4 class="list-group-item-heading">@kv.Key</h4>
+                        <p class="list-group-item-text">@kv.Value</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @foreach (var payment in Model.GetPayments())
+        {
+            var color = payment.IsFailed ? "danger" : (payment.IsCancelled ? "warning" : "success");
+            <div class="panel panel-@color">
+                <div class="panel-heading">Payment #@payment.Number fields</div>
+                @if (payment.CanBeFinalized)
+                {
+                    <div class="panel-body">
+                        <p>
+                            Certain payment types (e.g. cards) that result in <code>Authorized</code>
+                            payments, needs to be "captured" via a <code>FinalizeAuthorizationRequest</code>.
+                        </p>
+                        <div class="pull-right">
+                            @Html.Partial("_FinalizeInline", new Finalizable
+                       {
+                           TransactionId = payment.TransactionId,
+                           OrderId = payment.OrderId,
+                           Amount = payment.Amount.HasValue ? payment.Amount.Value : 0
+                       })
+                        </div>
+                    </div>
+                }
+                @if (payment.CanBeRefunded)
+                {
+                    <div class="panel-body">
+                        <p>
+                            Certain payment types (e.g. banks) that result in <code>Completed</code>
+                            payments, can be refunded without a finalization via a <code>RefundPaymentRequest</code>.
+                        </p>
+                        <div class="pull-right">
+                            @Html.Partial("_RefundInline", new Refundable
+                               {
+                                   TransactionId = payment.TransactionId,
+                                   TotalAmount = payment.Amount.HasValue ? payment.Amount.Value : 0
+                               })
+                        </div>
+                    </div>
+                }
+                <div class="list-group">
+                    @foreach (var kv in payment.GetPostedValues())
+                    {
+                        <div class="list-group-item">
+                            <h4 class="list-group-item-heading">@kv.Key</h4>
+                            <p class="list-group-item-text">@kv.Value</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>

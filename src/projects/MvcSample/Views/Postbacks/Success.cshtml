@@ -1,0 +1,10 @@
+﻿@model PostbackViewModel
+@{
+    ViewBag.Title = "Success";
+}
+<h1>Success!</h1>
+<div class="alert alert-success">
+    The payment was successfully processed at Paynova. Depending on payment method,
+    further actions might be needed. E.g. Finalize of a card transaction.
+</div>
+@Html.Partial("_PostedValues", Model)

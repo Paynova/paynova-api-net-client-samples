@@ -1,0 +1,61 @@
+﻿@model DetailedOrderViewModel
+
+@{
+    ViewBag.Title = "Checkout detailed order";
+}
+@Html.Partial("_BreadCrumb")
+
+<div class="m-samples">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span>Description</h3>
+                </div>
+                <div class="panel-body">
+                    This sample shows the creation of a "detailed" order. We will create an order with order
+                lines and shipping info as well as customer info and allow cards to be stored.
+                <p>
+                    Two calls will be made:
+                </p>
+                    <ul>
+                        <li><strong>CreateOrder</strong>: For setting up the order in Paynovas system.</li>
+                        <li><strong>InitializePayment</strong>: For starting/initiating a payment in Paynovas system.
+                        <p>
+                            <span class="label label-primary"><span class="fa fa-lightbulb-o"></span></span>
+                            One order can have several "part" payments
+                        </p>
+                        </li>
+                    </ul>
+                    <p>
+                        <code>InitializePayment</code> will (if successful) return
+                    an <code>Url</code> pointing to Paynova's page where
+                    your customer will be able to provide payment information and
+                    perform the transaction.
+                    </p>
+                    <p>
+                        The customer will be redirected back to the
+                    urls that was provided in the <code>InitializePaymentRequest</code>
+                    </p>
+                    <ul>
+                        <li><code>request.InterfaceOptions.UrlRedirectSuccess</code></li>
+                        <li><code>request.InterfaceOptions.UrlRedirectCancel</code></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="panel panel-warning">
+                <div class="panel-heading"><span class="glyphicon glyphicon-exclamation-sign"></span>Remarks</div>
+                <div class="panel-body">
+                    To not limit you further ahead in the process, we recommend
+                    that you provide as much information as possible in the <code>CreateOrderRequest</code> and
+                    <code>InitializePaymentRequest</code>.
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-container">
+        @Html.Partial("_DetailedOrderForm", Model.New)
+    </div>
+</div>

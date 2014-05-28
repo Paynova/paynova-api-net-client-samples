@@ -1,0 +1,10 @@
+﻿@model Finalizable
+
+@using (Html.BeginForm("Finalize", "Samples"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.TransactionId)
+    @Html.HiddenFor(m => m.OrderId)
+    @Html.HiddenFor(m => m.Amount)
+    <button type="submit" class="btn btn-primary">Finalize</button>
+}

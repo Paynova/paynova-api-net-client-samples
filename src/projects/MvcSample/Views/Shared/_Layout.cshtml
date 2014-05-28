@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    @Html.MetaAcceptLanguage()
+    <title>Paynova .NET API Client Samples @ViewBag.Title</title>
+    @Styles.Render("~/Content/styling")
+</head>
+<body>
+    @if (MvcApplication.Notifications.HasNotifications)
+    {
+        @Html.Action("Index", "Notifications")
+    }
+    <section id="header-section">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Paynova .NET API Client Samples</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    @if (MvcApplication.Notifications.HasNotifications)
+                    {
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <p class="navbar-text">
+                                    <a href="#" data-toggle="modal" data-target="#notificationsModal" class="label label-info">
+                                        <span class="glyphicon glyphicon-info-sign"></span>
+                                    </a>
+                                </p>
+                            </li>
+                        </ul>
+                    }
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Samples <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Order process</li>
+                                <li><a href="@Url.Action("SimpleOrder", "Samples")">Checkout - Simple order</a></li>
+                                <li><a href="@Url.Action("DetailedOrder", "Samples")">Checkout - Detailed order</a></li>
+                                <li><a href="@Url.Action("Finalize", "Samples")">Finalize</a></li>
+                                <li><a href="@Url.Action("Refund", "Samples")">Refund</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav">
+                        <li><a href="@Url.Action("Index", "Callbacks")">Callbacks <span class="badge" data-bind="text: callbackCount">0</span></a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="http://nuget.org/packages/paynova.api.client">NuGet</a></li>
+                        <li><a href="https://github.com/Paynova/paynova-api-net-client">GitHub</a></li>
+                        <li><a href="http://docs.paynova.com">API Docs</a></li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+    </section>
+    <section id="body-section" class="container">
+        @Html.Partial("_PaynovaClientExceptionAlert")
+        @RenderBody()
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/signalr")
+    <script src="~/signalr/hubs"></script>
+    @Scripts.Render("~/bundles/app")
+</body>
+</html>
