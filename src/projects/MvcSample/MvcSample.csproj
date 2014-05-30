@@ -161,7 +161,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DataSeeder.cs" />
     <Compile Include="Controllers\CallbacksController.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Controllers\Notifications.cs" />
+    <Compile Include="Core\Mvc\RawJsonResult.cs" />
     <Compile Include="Core\Mvc\FormCollectionExtensions.cs" />
     <Compile Include="Core\Serialization\JsonSerializer.cs" />
     <Compile Include="Core\Serialization\ISerializer.cs" />

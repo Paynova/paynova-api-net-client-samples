@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Linq;
 using System.Web.Mvc;
 using MvcSample.Core;
-using MvcSample.Core.Serialization;
 using MvcSample.Core.Storage;
 using MvcSample.Models;
 using MvcSample.Services;
@@ -14,15 +12,11 @@ namespace MvcSample.Controllers
 {
     public class SamplesController : Controller
     {
-        private readonly IStore _store;
         private readonly ICallbackResultStore _callbackResultStore;
-        private readonly ISerializer _jsonSerializer;
 
         public SamplesController()
         {
-            _store = MvcApplication.Store;
             _callbackResultStore = MvcApplication.CallbackResultStore;
-            _jsonSerializer = MvcApplication.JsonSerializer;
         }
 
         [HttpGet]
@@ -83,9 +77,6 @@ namespace MvcSample.Controllers
             newSampleOrder.AddLine("ts002", "Blue t-shirt", 2, 80m);
 
             var viewModel = new DetailedOrderViewModel(newSampleOrder);
-
-            var customers = _store.Query<Models.Customer>().OrderBy(c => c.Id);
-            ViewBag.CustomersJson = _jsonSerializer.Serialize(customers);
 
             return View(viewModel);
         }
