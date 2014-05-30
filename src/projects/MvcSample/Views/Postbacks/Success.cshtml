@@ -3,8 +3,13 @@
     ViewBag.Title = "Success";
 }
 <h1>Success!</h1>
-<div class="alert alert-success">
-    The payment was successfully processed at Paynova. Depending on payment method,
-    further actions might be needed. E.g. Finalize of a card transaction.
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-success">
+            The payment was successfully processed at Paynova. Depending on payment method,
+            further actions might be needed. E.g. Finalize of a card transaction.
+        </div>
+    </div>
+    <div class="col-md-6">@Html.Partial("_Digests")</div>
 </div>
 @Html.Partial("_PostedValues", Model)

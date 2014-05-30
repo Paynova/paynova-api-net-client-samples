@@ -3,5 +3,10 @@
     ViewBag.Title = "Cancel";
 }
 <h1>Cancel</h1>
-<div class="alert alert-info">The payment was cancelled.</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-info">The payment was cancelled.</div>
+    </div>
+    <div class="col-md-6">@Html.Partial("_Digests")</div>
+</div>
 @Html.Partial("_PostedValues", Model)

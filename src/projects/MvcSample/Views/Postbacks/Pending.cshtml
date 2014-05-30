@@ -3,5 +3,10 @@
     ViewBag.Title = "Pending";
 }
 <h1>Pending</h1>
-<div class="alert alert-warning">The payment ended up in a pending state at Paynova.</div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="alert alert-warning">The payment ended up in a pending state at Paynova.</div>
+    </div>
+    <div class="col-md-6">@Html.Partial("_Digests")</div>
+</div>
 @Html.Partial("_PostedValues", Model)

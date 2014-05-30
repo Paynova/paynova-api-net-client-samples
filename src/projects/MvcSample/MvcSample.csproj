@@ -303,6 +303,7 @@
     <Content Include="Views\Samples\EditorTemplates\OrderLine.cshtml" />
     <Content Include="Views\Samples\EditorTemplates\Address.cshtml" />
     <Content Include="Views\Samples\EditorTemplates\Customer.cshtml" />
+    <Content Include="Views\Postbacks\_Digests.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
