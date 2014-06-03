@@ -1,10 +1,15 @@
 ﻿@using Paynova.Api.Client
 @{
-    var pex = TempData["PaynovaClientException"] as PaynovaSdkException;
-
-    if (pex != null)
+    var keys = TempData.Keys.Where(k => k.StartsWith(typeof (PaynovaSdkException).Name + "_")).ToArray();
+    var exceptions = TempData.Where(kv => keys.Contains(kv.Key)).Select(kv => kv.Value).OfType<PaynovaSdkException>().ToArray();
+    foreach (var key in keys)
     {
-    <div class="alert-paynovaclientexception alert alert-danger alert-dismissable">
+        TempData.Remove(key);
+    }
+
+    foreach (var pex in exceptions)
+    {
+        <div class="alert-paynovaclientexception alert alert-danger alert-dismissable">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <div class="row">
             <div class="col-md-6">

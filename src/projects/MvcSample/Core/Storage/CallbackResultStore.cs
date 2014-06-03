@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using EnsureThat;
 using MvcSample.Core.Collections;
 using MvcSample.Models;
@@ -9,6 +10,8 @@ namespace MvcSample.Core.Storage
 {
     public class CallbackResultStore : ICallbackResultStore
     {
+        private static int _idCount;
+
         protected IStore State { get; private set; }
 
         public int Count
@@ -25,11 +28,17 @@ namespace MvcSample.Core.Storage
 
         public virtual CallbackResult Put(IDictionary<string, string> values)
         {
-            var entity = new CallbackResult(Count + 1, values);
+            var nextId = GetNextId();
+            var entity = new CallbackResult(nextId, values);
 
             State.Put(entity.Id, entity);
 
             return entity;
+        }
+
+        protected virtual int GetNextId()
+        {
+            return Interlocked.Increment(ref _idCount);
         }
 
         public virtual IEnumerable<CallbackResult> GetAll()

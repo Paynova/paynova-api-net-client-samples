@@ -80,7 +80,7 @@
     <Reference Include="Owin">
       <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Paynova.Api.Client, Version=1.0.0.29377, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Paynova.Api.Client, Version=1.0.0.15873, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\Paynova.Api.Client.1.0.0\lib\net35\Paynova.Api.Client.dll</HintPath>
     </Reference>
