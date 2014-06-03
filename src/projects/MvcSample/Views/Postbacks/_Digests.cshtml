@@ -1,0 +1,20 @@
+﻿@model dynamic
+
+<div class="panel panel-info">
+    <div class="panel-heading"><span class="glyphicon glyphicon-info-sign"></span>Digests</div>
+    <div class="panel-body">
+        <p>
+            The postbacks has digests in them that you can use to verify the orgin/content of the request.
+            You can read more about this in the API-documentation.
+        </p>
+        <p>
+            If you want assistence to verify the digests, you can make use of helpers found under:
+            <code>Paynova.Api.Client.Security</code>
+        </p>
+        <pre><code>var digest = new PostbackDigest("YOUR_SECRET_KEY");
+var isValid = digest.Validate(Request.Form);
+//or
+var digestString = digest.Calculate(Request.Form)</code></pre>
+        <p><span class="label label-primary"><span class="fa fa-lightbulb-o"></span></span>&nbsp;It also works with <code>IDictionary&lt;string, string&gt;</code></p>
+    </div>
+</div>

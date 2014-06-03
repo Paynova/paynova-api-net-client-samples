@@ -1,0 +1,9 @@
+﻿@model Refundable
+
+@using (Html.BeginForm("Refund", "Samples"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.TransactionId)
+    @Html.HiddenFor(m => m.TotalAmount)
+    <button type="submit" class="btn btn-danger">Refund</button>
+}

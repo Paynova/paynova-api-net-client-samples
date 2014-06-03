@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Samples";
+}
+@Html.Partial("_BreadCrumb")
+<div class="m-samples row">
+    <div class="col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span>Description</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    This simple sample site allows you to execute operations against Paynova's API, using the
+                    .Net API Client.
+                </p>
+                <p>
+                    To keep it simple, the samples does not allow input. Inputs are fixed. The idea is that you
+                    should be able to step-through code, inspect responses, callbacks etc.
+                </p>
+                <p>
+                    Have a look in the <code>SamplesController</code>. It makes use of a simple <code>SamplePaynovaService</code>
+                    which encapsulates all communication with Paynova's API.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading"><span class="glyphicon glyphicon-warning-sign"></span>Configuration</div>
+            <div class="panel-body">
+                Configure endpoints and credentials against Paynova's testenvironment as provided in
+                <code>AppSettings</code> in the <code>Web.config</code> file.
+            </div>
+        </div>
+
+        <div class="panel panel-warning">
+            <div class="panel-heading"><span class="glyphicon glyphicon-warning-sign"></span>Reachable endpoint</div>
+            <div class="panel-body">
+                <p>
+                    To get callbacks delivered to the sample application, you need to provide an endpoint (URL or IP)
+                    that Paynova's server can reach over HTTP.
+                </p>
+                <p>
+                    When running IIS-Express locally, this can be achieved by providing your IP address and in the
+                    <code>C:\...\your_user\Documents\IISExpress\config\applicationhost.config</code> for the sample
+                    site, register yet another binding:
+                </p>
+                <pre><code>&lt;binding
+    protocol="http"
+    bindingInformation="*:63567:192.168.201.132" /&gt;
+</code></pre>
+            </div>
+        </div>
+    </div>
+</div>

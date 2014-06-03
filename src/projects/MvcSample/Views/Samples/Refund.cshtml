@@ -1,0 +1,42 @@
+﻿@model RefundViewModel
+@{
+    ViewBag.Title = "Refund payment";
+}
+@Html.Partial("_BreadCrumb")
+
+<div class="m-samples row">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span>Description</h3>
+            </div>
+            <div class="panel-body">
+                <p>
+                    Once a payment has been completed, e.g. directly via bank payment or after finalized credit card,
+                    you can perform refund on the payments. This is done by passing a <code>RefundPaymentRequest</code>
+                    to <code>PaynovaClient.RefundPayment(request)</code>.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        @if (Model.Refunded != null)
+        {
+            @Html.Partial("_Refunded", Model.Refunded)
+        }
+
+        @if (!Model.RefundableItems.Any())
+        {
+            <div class="alert alert-info">Nothing exists to refund. You need to perform some payments first.</div>
+        }
+        else
+        {
+            foreach (var item in Model.RefundableItems)
+            {
+            <div class="form-container">
+                @Html.Partial("_RefundForm", item)
+            </div>
+            }
+        }
+    </div>
+</div>

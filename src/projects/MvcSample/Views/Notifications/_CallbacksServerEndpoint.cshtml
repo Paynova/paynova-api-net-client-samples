@@ -1,0 +1,11 @@
+﻿@model dynamic
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Different Callbacks server endpoint vs host</h3>
+    </div>
+    <div class="panel-body">
+        Configured server endpoint for callbacks is:
+        <a href="@Model.CallbacksAbsoluteUri">@Model.CallbacksAbsoluteUri</a>
+        this is not the same as <code>@Model.CurrentAbsoluteUri</code>.
+    </div>
+</div>

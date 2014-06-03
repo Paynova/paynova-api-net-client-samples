@@ -1,0 +1,25 @@
+﻿@model OrderLine
+
+<div class="row">
+    @Html.HiddenFor(m => m.ArticleNumber)
+    @Html.HiddenFor(m => m.UnitPrice)
+    @Html.HiddenFor(m => m.VatPercent)
+    <div class="col-sm-7">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="fa fa-gift"></span></span>
+            @Html.MyTextBoxFor(m => m.ArticleName)
+        </div>
+    </div>
+    <div class="col-sm-2">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="fa fa-asterisk"></span></span>
+            @Html.MyTextBoxFor(m => m.Quantity)
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="input-group">
+            <span class="input-group-addon"><span class="fa fa-money"></span></span>
+            @Html.MyTextBoxFor(m => m.TotalAmount)
+        </div>
+    </div>
+</div>
