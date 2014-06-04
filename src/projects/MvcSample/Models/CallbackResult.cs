@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Paynova.Api.Client;
 
 namespace MvcSample.Models
 {
@@ -83,7 +84,7 @@ namespace MvcSample.Models
 
         protected virtual decimal? GetDecimal(string field)
         {
-            return State.ContainsKey(field) ? decimal.Parse(State[field]) : (decimal?) null;
+            return State.ContainsKey(field) ? decimal.Parse(State[field], Runtime.Instance.NumberFormatProvider) : (decimal?) null;
         }
     }
 }
