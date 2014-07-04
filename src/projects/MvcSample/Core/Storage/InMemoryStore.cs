@@ -17,6 +17,16 @@ namespace MvcSample.Core.Storage
             State = new ConcurrentDictionary<Type, ConcurrentDictionary<string, dynamic>>();
         }
 
+        public virtual void Clear()
+        {
+            foreach (var dic in State.Values)
+            {
+                dic.Clear();
+            }
+
+            State.Clear();
+        }
+
         public virtual void Apply<T>(Func<T, bool> predicate, Action<T> change)
         {
             //No need to snapshot. Running in-memory.

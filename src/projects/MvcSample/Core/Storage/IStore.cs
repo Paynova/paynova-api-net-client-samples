@@ -5,6 +5,7 @@ namespace MvcSample.Core.Storage
 {
     public interface IStore
     {
+        void Clear();
         void Apply<T>(Func<T, bool> predicate, Action<T> change);
         int Count<T>();
 

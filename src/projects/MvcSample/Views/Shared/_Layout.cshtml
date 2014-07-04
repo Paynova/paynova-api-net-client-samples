@@ -57,6 +57,11 @@
                         <li><a href="http://nuget.org/packages/paynova.api.client">NuGet</a></li>
                         <li><a href="https://github.com/Paynova/paynova-api-net-client">GitHub</a></li>
                         <li><a href="http://docs.paynova.com">API Docs</a></li>
+                        <li>
+                            <form action="@Url.Action("Clear", "State")" method="POST">
+                                <button type="submit" class="btn btn-danger navbar-btn">CLEAR MEMORY</button>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
